@@ -56,7 +56,7 @@ exports.fetchProductsByFilter = async (req, res) => {
     res.status(200).json({ data: docs, items: totalDocs });
   } catch (err) {
     res.status(400).json(err);
-    console.log(res.json(err));
+    console.error(err);
   }
 };
 
