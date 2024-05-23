@@ -16,10 +16,14 @@ exports.fetchProductsByFilter = async (req, res) => {
   // filter = {category:[smatphone, laptops]}
   // sort = {_sort : '-ratings'}
   //pagination = {_page:1, _limit: 10}
-  console.log(req.query);
+  let condition = {};
+  // console.log(req.query);
+  if (!req.query.admin) {
+    condition = { deleted: { $ne: true } };
+  }
 
-  let query = Product.find({});
-  let totalProductsQuery = Product.find({});
+  let query = Product.find(condition);
+  let totalProductsQuery = Product.find(condition);
   if (req.query.category) {
     query = query.find({ category: req.query.category });
     totalProductsQuery = totalProductsQuery.find({
