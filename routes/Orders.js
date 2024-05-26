@@ -10,7 +10,7 @@ const {
 const router = express.Router();
 //This rouetr has the base path as orders
 router
-  .get("/user/:userId", fetchOrderByUser)
+  .get("/own", fetchOrderByUser)
   .post("/", createOrder)
   .patch("/:id", updateOrder)
   .delete("/:id", deleteOrder)
