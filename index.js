@@ -77,7 +77,7 @@ passport.use(
           } else {
             const token = jwt.sign(sanitizeUser(user), SECRET_KEY);
             console.log("Local strategy : " + token);
-            done(null, { token });
+            done(null, { id: user.id, role: user.role });
           }
         }
       );

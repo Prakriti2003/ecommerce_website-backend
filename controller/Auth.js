@@ -30,7 +30,7 @@ exports.createUser = async (req, res) => {
                 httpOnly: true,
               })
               .status(201)
-              .json(token);
+              .json({ id: doc.id, role: doc.role });
           }
         });
       }
@@ -47,10 +47,14 @@ exports.loginUser = async (req, res) => {
       httpOnly: true,
     })
     .status(201)
-    .json(req.user.token);
+    .json({ id: req.user.id, role: req.user.role });
 };
 
-exports.checkUser = async (req, res) => {
-  console.log("Authenticated user:", req.user);
-  res.json({ status: "success", user: req.user });
+exports.checkAuth = async (req, res) => {
+  if (req.user) {
+    console.log("Authenticated user:", req.user);
+    res.json(req.user);
+  } else {
+    res.sendStatus(401);
+  }
 };
